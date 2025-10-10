@@ -1,0 +1,70 @@
+# DEPLOY-NETLIFY.txt
+
+✅ CHECKLIST OF FILES
+/
+├─ index.html
+├─ styles.css
+├─ script.js
+├─ /content/site.json
+└─ /assets/
+
+---
+
+🧰 GIT COMMANDS
+
+git init
+git add .
+git commit -m "init Simba Films site"
+git branch -M main
+git remote add origin https://github.com/<your-user>/<your-repo>.git
+git push -u origin main
+
+(Replace <your-user> and <your-repo> with your GitHub name and repository name)
+
+---
+
+🌍 NETLIFY (IMPORT FROM GIT)
+
+- Build command: leave it empty
+- Publish directory: .
+
+---
+
+🛡️ NETLIFY.TOML (create this file in your main folder)
+
+[[headers]]
+  for = "/content/site.json"
+  [headers.values]
+    Cache-Control = "no-store"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+---
+
+✉️ CONTACT FORM (Formspree)
+
+<form action="https://formspree.io/f/YOUR_ID" method="POST">
+  ...
+</form>
+
+---
+
+🔎 CHECK AFTER DEPLOY
+
+- Images show correctly  
+- Projects load from site.json  
+- Showreel appears  
+- Social icons visible  
+- Hero rotator changes images  
+
+---
+
+💡 TIPS
+
+• Every time you change **content/site.json**, Netlify automatically updates your live site.  
+• Use **Cmd + Shift + R** (Mac) or **Ctrl + F5** (Windows) to hard refresh.  
+• You can connect your own custom domain later under **Domain settings**.
+

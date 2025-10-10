@@ -1,0 +1,96 @@
+{
+  "brand": {
+    "logo": "assets/Simba film.png",
+    "name": "Simba Films"
+  },
+  "backgrounds": [
+    { "src": "assets/D1.png", "alt": "Still D1" },
+    { "src": "assets/L+.png", "alt": "Still L+" },
+    { "src": "assets/BC1.png", "alt": "Still BC1" },
+    { "src": "assets/S1.png", "alt": "Still S1" },
+    { "src": "assets/BC3.png", "alt": "Still BC3" },
+    { "src": "assets/D2.png", "alt": "Still D2" },
+    { "src": "assets/J2.png", "alt": "Still J2" }
+  ],
+  "hero": {
+    "headline": "Where stories <span class='highlight'>roar</span> to life.",
+    "lede": "I'm <strong>Derek Simba</strong>, filmmaker and <strong>creative director</strong> behind <strong>Simba Films</strong>. I craft narratives and documentaries across Africa and Europe.",
+    "ctaProjects": "View projects",
+    "ctaReel": "Watch the showreel",
+    "base": "Switzerland",
+    "langs": "EN • FR • SW",
+    "image": "assets/hero/02.JPG"
+  },
+    "gallery": [
+    "assets/hero/05.JPG",
+    "assets/hero/02.JPG",
+    "assets/hero/Sans titre-1 copie.JPG"
+  ],
+
+  "reels": [
+{
+      "title": "Main Showreel",
+      "platform": "youtube",
+      "youtubeId": "d7aq82URjIk",
+      "params": "rel=0&modestbranding=1"
+    },
+    {
+      "title": "Documentary Reel",
+      "platform": "vimeo",
+      "vimeoId": "123456789",
+      "params": "title=0&byline=0&portrait=0"
+    },
+    {
+      "title": "Commercial Reel",
+      "platform": "youtube",
+      "youtubeId": "AwO_hZ02W-4",
+      "params": "rel=0&modestbranding=1"
+    }
+  ],
+
+  "projects": [
+    {
+      "title": "Blood Coltan",
+      "image": "assets/projects/Blood Coltan visual.jpg",
+      "watchUrl": "https://youtu.be/28HLqKPkrJY",
+      "summary": "Un drame tendu sur la corruption, la trahison et le coût humain de l’exploitation minière.",
+      "tags": ["Short • 35'", "Drama", "2025"],
+      "cta1": { "label": "TRAILER", "url": "#" },
+      "cta2": { "label": "Press Kit (PDF)", "url": "#" }
+    },
+    {
+      "title": "Montricher : Montraid'Union",
+      "image": "assets/projects/montricher.png",
+      "watchUrl": "https://youtu.be/OOHewxo0jEg",
+      "summary": "Court documentaire avec Montraid'Union, une association locale qui recrée du lien social avec les aînés.",
+      "tags": ["Documentary","2024","Switzerland"],
+      "cta1": { "label": "Doc", "url": "#" },
+      "cta2": { "label": "Case Study", "url": "#" }
+    },
+    {
+      "title": "Upcoming Projects",
+      "image": "assets/projects/upcoming.svg",
+      "watchUrl": "",
+      "summary": "Une histoire de survie, d’identité et de réinvention à...",
+      "tags": ["Fiction","In development","Switzerland"],
+      "cta1": { "label": "Lookbook", "url": "#" },
+      "cta2": { "label": "Pitch Deck", "url": "#" }
+    }
+  ]
+  ,
+  "socials": [
+    {
+      "platform": "instagram",
+      "url": "https://instagram.com/derek_simba",
+      "icon": "assets/icons/instagram.svg" },
+    {
+      "platform": "tiktok",
+      "url": "https://tiktok.com/@dereksimba01",
+      "icon": "assets/icons/tiktok.svg" },
+    {
+      "platform": "facebook",
+      "url": "https://facebook.com/derekshotit",
+      "icon": "assets/icons/facebook.svg" }
+  ]
+  }
+

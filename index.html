@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Simba Films — Derek Simba | Director & Filmmaker</title>
+  <meta name="description" content="Simba Films — Film direction, storytelling, and branded content by Derek Simba.">
+  <meta property="og:title" content="Simba Films — Derek Simba" />
+  <meta property="og:description" content="Film direction, storytelling, and branded content by Derek Simba." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/hero.svg" />
+  <link rel="icon" href="assets/logo-simba.svg" type="image/svg+xml" />
+  <link rel="preload" href="assets/hero.svg" as="image" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="home">
+  <!-- Background Slideshow (injecté via JSON) -->
+  <div class="bg-slideshow" id="bg-slideshow" data-cms-list="backgrounds">
+    <!-- le script injectera <img> depuis content/site.json -->
+  </div>
+
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header class="site-header" data-header>
+    <div class="container nav reveal">
+      <a href="#hero" class="brand" aria-label="Simba Films accueil">
+        <img data-cms="brand.logo" src="assets/Simba film.PNG" alt="Logo Simba Films" class="brand__logo" />
+        <span class="brand__text" data-cms-text="brand.name">Simba Films</span>
+      </a>
+
+      <button class="nav__toggle" aria-expanded="false" aria-controls="menu" aria-label="Basculer le menu" data-toggle>
+        ☰
+      </button>
+
+      <nav id="menu" class="nav__menu" data-menu>
+        <a href="#about" class="reveal stagger delay-1">About</a>
+        <a href="#work" class="reveal stagger delay-2">Projects</a>
+        <a href="#reel" class="reveal stagger delay-3">Showreel</a>
+        <a href="#contact" class="btn btn--accent reveal stagger delay-4">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section id="hero" class="hero">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <h1 class="reveal" data-cms-html="hero.headline">Where stories <span class="highlight">roar</span> to life.</h1>
+          <p class="lede reveal delay-1" data-cms-html="hero.lede">
+            I'm <strong>Derek Simba</strong>, filmmaker and <strong>creative director</strong> behind <strong>Simba Films</strong>.
+            I craft narratives and documentaries across Africa and Europe.
+          </p>
+          <div class="hero__cta reveal delay-2">
+            <a href="#work" class="btn cta" data-cms-text="hero.ctaProjects">View projects</a>
+            <a href="#reel" class="btn btn--ghost" data-cms-text="hero.ctaReel">Watch the showreel</a>
+          </div>
+          <ul class="hero__meta reveal delay-3">
+            <li>Based: <span data-cms-text="hero.base">Switzerland</span></li>
+            <li>Langues : <span data-cms-text="hero.langs">EN • FR • SW</span></li>
+          </ul>
+        </div>
+
+        <!-- Parallax souris -->
+       <figure class="02__media reveal" data-parallax-mouse data-strength="12">
+  <div class="hero-rotator" data-hero-rotator></div>
+</figure>
+
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="container grid-2">
+        <div>
+          <h2 class="reveal">About</h2>
+          <p class="reveal delay-1">
+            Simba Films blends cinematic <strong>visuals</strong> with authentic, human storytelling. I collaborate with producers and DOPs worldwide to deliver short films, 
+            branded content, and documentaries.
+          </p>
+          <ul class="bullets reveal delay-2">
+            <li>Directing • Writing • Producing</li>
+            <li>Docu-shorts • Fiction • Branded</li>
+            <li>Post : Premiere Pro • DaVinci Resolve</li>
+          </ul>
+          <a href="#contact" class="link reveal delay-3">Request a quote →</a>
+        </div>
+        <div>
+          <div class="stat reveal"><span class="stat__num">35'<sup>+</sup></span><span class="stat__label">Running time</span></div>
+          <div class="stat reveal delay-1"><span class="stat__num">3</span><span class="stat__label">Countries of activity</span></div>
+          <div class="card note reveal delay-2"><strong>Availability :</strong> Booking for T4 2025 • T1 2026</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="work" class="section alt">
+      <div class="container">
+        <h2 class="reveal">Selected Projects</h2>
+        <div class="cards" id="projects" data-cms-list="projects">
+          <!-- injecté depuis JSON -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOWREEL -->
+  <section id="reel" class="section">
+  <div class="container">
+    <h2 class="reveal">Showreel</h2>
+    <div class="reel-select-wrap">
+      <label for="reel-select" class="sr-only">Choisir un showreel</label>
+      <select id="reel-select" class="reel-select"></select>
+    </div>
+    <div id="reel-embed" class="reel-frame"></div>
+  </div>
+</section>
+
+
+    <!-- CONTACT -->
+    <section id="contact" class="section alt">
+      <div class="container grid-2">
+        <div>
+          <h2 class="reveal">Let's Work together</h2>
+          <p class="reveal delay-1">Let's talk about your project, I'll come back to you with ideas, timelines, and a budget estimate.</p>
+          <ul class="contact-list reveal delay-2">
+  <li><strong>Email :</strong> <a href="mailto:derek.simba12@gmail.com">derek.simba12@gmail.com</a></li>
+  <li><strong>Locations :</strong> Switzerland • RD Congo • South Africa</li>
+</ul>
+
+<!-- Réseaux sociaux (injectés automatiquement) -->
+<ul class="socials" data-cms-list="socials"></ul>
+
+        </div>
+        <!-- Remplace l’URL Formspree par la tienne -->
+        <form class="form reveal delay-3" action="https://formspree.io/f/your-id" method="POST">
+          <label>
+            Your Name
+            <input name="name" type="text" required />
+          </label>
+          <label>
+            Email
+            <input name="email" type="email" required />
+          </label>
+          <label>
+            Project Details
+            <textarea name="message" rows="6" placeholder="What can we create together ?" required></textarea>
+          </label>
+          <button class="btn btn--accent cta" type="submit">Send</button>
+          <p class="form__note">By submitting, you agree to be contacted regarding your project.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer__grid reveal">
+      <p>©️ <span id="year"></span> Simba Films — Derek Simba. All rights reserved ✅.</p>
+      <nav class="footer__menu">
+        <a href="#about">About</a>
+        <a href="#work">Projects</a>
+        <a href="#reel">Showreel</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- ANIM: garde ton anim.js si tu l’utilises -->
+  <script src="anim.js"></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
+<script src="anim.js"></script>
+<script src="script.js" defer></script>
