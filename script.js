@@ -275,9 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
     link.href = 'mailto:derek@simbafilms.org';
   }
 });
-
-
-  // ----- 10) Réinitialiser les animations (anim.js) -----
+ // ----- 10) Réinitialiser les animations (anim.js) -----
   if (typeof window.initUX === 'function') window.initUX(document);
 })();
 // ----- Mise à jour du contact email depuis le JSON -----
