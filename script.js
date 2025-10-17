@@ -1,12 +1,12 @@
-// script.js — charge content/site.json et injecte le contenu
+// script.js — charge content/site.json et injecte le contenu (+ fix email)
 (async () => {
   const VERSION = Date.now(); // cache-busting simple
   const JSON_URL = `content/site.json?v=${VERSION}`;
 
   // Helpers
   const get = (obj, path) => path.split('.').reduce((a, k) => (a ? a[k] : undefined), obj);
-  const qs  = (s,root=document) => root.querySelector(s);
-  const qsa = (s,root=document) => Array.from(root.querySelectorAll(s));
+  const qs  = (s, root = document) => root.querySelector(s);
+  const qsa = (s, root = document) => Array.from(root.querySelectorAll(s));
 
   // ----- 1) Charger le JSON -----
   let cfg;
@@ -52,6 +52,62 @@
     const val = get(cfg, key);
     if (typeof val === 'string') el.innerHTML = val;
   });
+
+  // ----- 2.b) Injection e-mail (texte + href) -----
+  (function injectEmail() {
+    // Email depuis le JSON (fallback sur ton mail pro)
+    const email = (get(cfg, 'contact.email') || 'derek@simbafilms.org').trim();
+
+    // 1) Lien principal par id #contactEmail (recommandé dans index.html)
+    const mainLink = qs('#contactEmail');
+    if (mainLink) {
+      mainLink.textContent = email;
+      mainLink.setAttribute('href', `mailto:${email}`);
+      mainLink.setAttribute('data-email', 'true');
+    }
+
+    // 2) Cibles "CMS"
+    // ex. <span data-cms-text="contact.email"></span>
+    qsa('[data-cms-text="contact.email"]').forEach(el => {
+      el.textContent = email;
+    });
+    // ex. <a data-cms="contact.email"></a> pour le href
+    qsa('[data-cms="contact.email"]').forEach(el => {
+      // Si c’est un lien, on le traite comme mailto
+      const isAnchor = el.tagName === 'A';
+      if (isAnchor) {
+        el.textContent = email;
+        el.setAttribute('href', `mailto:${email}`);
+      } else {
+        // Sinon on met juste le texte
+        el.textContent = email;
+      }
+    });
+
+    // 3) Sélecteurs explicites si tu veux marquer des cibles : .js-email, [data-email]
+    qsa('.js-email, [data-email]').forEach(el => {
+      if (el.tagName === 'A') {
+        el.textContent = email;
+        el.setAttribute('href', `mailto:${email}`);
+      } else {
+        el.textContent = email;
+      }
+    });
+
+    // 4) Filet de sécurité : corriger d’anciens liens mailto si présents
+    // (ex. ancien gmail resté en dur dans le HTML)
+    qsa('a[href^="mailto:"]').forEach(a => {
+      const href = a.getAttribute('href') || '';
+      const txt  = (a.textContent || '').trim();
+
+      // Si le texte contient un '@' différent de celui qu’on veut, on remplace.
+      const txtHasAt = txt.includes('@') && txt !== email;
+      const hrefDiff = !href.includes(`mailto:${email}`);
+
+      if (txtHasAt) a.textContent = email;
+      if (hrefDiff) a.setAttribute('href', `mailto:${email}`);
+    });
+  })();
 
   // ----- 3) Slideshow de fond -----
   (function(){
