@@ -95,10 +95,6 @@
       "icon": "assets/icons/facebook.svg"
     }
   ],
-  "contact": {
-    "email": "derek@simbafilms.org"}
-    "locations": ["Switzerland", "RD Congo", "South Africa"]
-  }
-}
+  "contact": { "email": "derek@simbafilms.org" }
 
 
