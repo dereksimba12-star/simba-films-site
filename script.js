@@ -267,6 +267,15 @@
       menu.classList.toggle('is-open');
     });
   })();
+  // --- Sécurité : forcer l'affichage de l'e-mail ---
+document.addEventListener('DOMContentLoaded', () => {
+  const link = document.querySelector('#contactEmail');
+  if (link && !link.textContent.includes('@')) {
+    link.textContent = 'derek@simbafilms.org';
+    link.href = 'mailto:derek@simbafilms.org';
+  }
+});
+
 
   // ----- 10) Réinitialiser les animations (anim.js) -----
   if (typeof window.initUX === 'function') window.initUX(document);
