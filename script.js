@@ -271,3 +271,10 @@
   // ----- 10) Réinitialiser les animations (anim.js) -----
   if (typeof window.initUX === 'function') window.initUX(document);
 })();
+// ----- Mise à jour du contact email depuis le JSON -----
+const email = (cfg?.contact?.email || 'derek@simbafilms.org').trim();
+const emailLink = document.querySelector('#contactEmail');
+if (emailLink) {
+  emailLink.textContent = email;
+  emailLink.setAttribute('href', `mailto:${email}`);
+}
