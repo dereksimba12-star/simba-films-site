@@ -11,13 +11,12 @@
   <meta property="og:image" content="assets/hero.svg" />
   <link rel="icon" href="assets/logo-simba.svg" type="image/svg+xml" />
   <link rel="preload" href="assets/hero.svg" as="image" />
-  <link rel="stylesheet" href="styles.css?v=2" />
+  <link rel="stylesheet" href="styles.css?v=3" />
 </head>
+
 <body data-page="home">
-  <!-- Background Slideshow (injecté via JSON) -->
-  <div class="bg-slideshow" id="bg-slideshow" data-cms-list="backgrounds">
-    <!-- le script injectera <img> depuis content/site.json -->
-  </div>
+  <!-- Background Slideshow -->
+  <div class="bg-slideshow" id="bg-slideshow" data-cms-list="backgrounds"></div>
 
   <a class="skip-link" href="#main">Aller au contenu</a>
 
@@ -28,9 +27,7 @@
         <span class="brand__text" data-cms-text="brand.name">Simba Films</span>
       </a>
 
-      <button class="nav__toggle" aria-expanded="false" aria-controls="menu" aria-label="Basculer le menu" data-toggle>
-        ☰
-      </button>
+      <button class="nav__toggle" aria-expanded="false" aria-controls="menu" aria-label="Basculer le menu" data-toggle>☰</button>
 
       <nav id="menu" class="nav__menu" data-menu>
         <a href="#about" class="reveal stagger delay-1">About</a>
@@ -61,11 +58,9 @@
           </ul>
         </div>
 
-        <!-- Parallax souris -->
-       <figure class="02__media reveal" data-parallax-mouse data-strength="12">
-  <div class="hero-rotator" data-hero-rotator></div>
-</figure>
-
+        <figure class="02__media reveal" data-parallax-mouse data-strength="12">
+          <div class="hero-rotator" data-hero-rotator></div>
+        </figure>
       </div>
     </section>
 
@@ -75,7 +70,7 @@
         <div>
           <h2 class="reveal">About</h2>
           <p class="reveal delay-1">
-            Simba Films blends cinematic <strong>visuals</strong> with authentic, human storytelling. I collaborate with producers and DOPs worldwide to deliver short films, 
+            Simba Films blends cinematic <strong>visuals</strong> with authentic, human storytelling. I collaborate with producers and DOPs worldwide to deliver short films,
             branded content, and documentaries.
           </p>
           <ul class="bullets reveal delay-2">
@@ -97,63 +92,54 @@
     <section id="work" class="section alt">
       <div class="container">
         <h2 class="reveal">Selected Projects</h2>
-        <div class="cards" id="projects" data-cms-list="projects">
-          <!-- injecté depuis JSON -->
-        </div>
+        <div class="cards" id="projects" data-cms-list="projects"></div>
       </div>
     </section>
 
     <!-- SHOWREEL -->
-  <section id="reel" class="section">
-  <div class="container">
-    <h2 class="reveal">Showreel</h2>
-    <div class="reel-select-wrap">
-      <label for="reel-select" class="sr-only">Choisir un showreel</label>
-      <select id="reel-select" class="reel-select"></select>
-    </div>
-    <div id="reel-embed" class="reel-frame"></div>
-  </div>
-</section>
-
+    <section id="reel" class="section">
+      <div class="container">
+        <h2 class="reveal">Showreel</h2>
+        <div class="reel-select-wrap">
+          <label for="reel-select" class="sr-only">Choisir un showreel</label>
+          <select id="reel-select" class="reel-select"></select>
+        </div>
+        <div id="reel-embed" class="reel-frame"></div>
+      </div>
+    </section>
 
     <!-- CONTACT -->
-   <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
-  <!-- Champ caché obligatoire pour que Netlify reconnaisse le formulaire -->
-  <input type="hidden" name="form-name" value="contact" />
-  <!-- Champ anti-spam (honeypot) -->
-  <input type="hidden" name="bot-field" />
+    <section id="contact" class="section alt">
+      <div class="container grid-2">
+        <div>
+          <h2 class="reveal">Let's Work together</h2>
+          <p class="reveal delay-1">Let's talk about your project, I'll come back to you with ideas, timelines, and a budget estimate.</p>
+          <ul class="contact-list reveal delay-2">
+            <li><strong>Email :</strong> <a id="contactEmail" href="mailto:derek@simbafilms.org">derek@simbafilms.org</a></li>
+            <li><strong>Locations :</strong> <span data-cms-text="contact.locations">Switzerland • RD Congo • South Africa</span></li>
+          </ul>
 
-  <input type="text" name="name" placeholder="Votre nom" required>
-  <input type="email" name="email" placeholder="Votre e-mail" required>
-  <textarea name="message" placeholder="Votre message" required></textarea>
-  <button type="submit">Envoyer</button>
-</form>
-
-
-  <p>or email me directly at 
-    <a href="mailto:derek@simbafilms.org">derek@simbafilms.org</a>
-  </p>
-</section>
-
-
-<!-- Réseaux sociaux (injectés automatiquement) -->
-<ul class="socials" data-cms-list="socials"></ul>
-
+          <!-- Réseaux sociaux -->
+          <ul class="socials" data-cms-list="socials"></ul>
         </div>
-        <!-- Remplace l’URL Formspree par la tienne -->
-        <form class="form reveal delay-3" action="https://formspree.io/f/mqayywey" method="POST">
-          <label>
-            Your Name
+
+        <!-- Formulaire Netlify -->
+        <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" class="form reveal delay-3">
+          <input type="hidden" name="form-name" value="contact" />
+          <input type="hidden" name="bot-field" />
+
+          <label>Your Name
             <input name="name" type="text" required />
           </label>
-          <label>
-            Email
+
+          <label>Email
             <input name="email" type="email" required />
           </label>
-          <label>
-            Project Details
+
+          <label>Project Details
             <textarea name="message" rows="6" placeholder="What can we create together ?" required></textarea>
           </label>
+
           <button class="btn btn--accent cta" type="submit">Send</button>
           <p class="form__note">By submitting, you agree to be contacted regarding your project.</p>
         </form>
@@ -173,10 +159,7 @@
     </div>
   </footer>
 
-  <!-- ANIM: garde ton anim.js si tu l’utilises -->
   <script src="anim.js"></script>
   <script src="script.js" defer></script>
 </body>
 </html>
-<script src="anim.js"></script>
-<script src="script.js" defer></script>
