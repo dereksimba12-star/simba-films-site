@@ -117,15 +117,22 @@
 
 
     <!-- CONTACT -->
-    <section id="contact" class="section alt">
-      <div class="container grid-2">
-        <div>
-          <h2 class="reveal">Let's Work together</h2>
-          <p class="reveal delay-1">Let's talk about your project, I'll come back to you with ideas, timelines, and a budget estimate.</p>
-          <ul class="contact-list reveal delay-2">
-  <li><strong>Email :</strong> <a href="mailto:derek.simba12@gmail.com">derek.simba12@gmail.com</a></li>
-  <li><strong>Locations :</strong> Switzerland • RD Congo • South Africa</li>
-</ul>
+    <section id="contact">
+  <h2>Let's Work Together</h2>
+  <p>Get in touch for collaborations, film projects or inquiries.</p>
+
+  <form name="contact" method="POST" data-netlify="true">
+    <input type="text" name="name" placeholder="Your name" required>
+    <input type="email" name="email" placeholder="Your email" required>
+    <textarea name="message" placeholder="Your message" required></textarea>
+    <button type="submit">Send</button>
+  </form>
+
+  <p>or email me directly at 
+    <a href="mailto:derek@simbafilms.org">derek@simbafilms.org</a>
+  </p>
+</section>
+
 
 <!-- Réseaux sociaux (injectés automatiquement) -->
 <ul class="socials" data-cms-list="socials"></ul>

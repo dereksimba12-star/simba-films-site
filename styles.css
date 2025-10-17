@@ -167,10 +167,10 @@ a:focus, button:focus, input:focus, textarea:focus {outline:2px dashed var(--acc
   backface-visibility: hidden;
   animation: bgSlide 30s infinite;
 }
-.bg-slideshow image.show{ opacity: 1;}
+.bg-slideshow image.show { opacity: 1;
 }
-.
-bg-slideshow img:nth-child(1) { animation-delay: 00s; }
+
+.bg-slideshow img:nth-child(1) { animation-delay: 00s; }
 .bg-slideshow img:nth-child(2) { animation-delay: 10s; }
 .bg-slideshow img:nth-child(3) { animation-delay: 20s; }
 .bg-slideshow img:nth-child(4) { animation-delay: 30s; }
