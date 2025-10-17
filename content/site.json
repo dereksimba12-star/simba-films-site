@@ -78,19 +78,27 @@
     }
   ]
   ,
-  "socials": [
+    "socials": [
     {
       "platform": "instagram",
       "url": "https://instagram.com/derek_simba",
-      "icon": "assets/icons/instagram.svg" },
+      "icon": "assets/icons/instagram.svg"
+    },
     {
       "platform": "tiktok",
       "url": "https://tiktok.com/@dereksimba01",
-      "icon": "assets/icons/tiktok.svg" },
+      "icon": "assets/icons/tiktok.svg"
+    },
     {
       "platform": "facebook",
       "url": "https://facebook.com/derekshotit",
-      "icon": "assets/icons/facebook.svg" }
-  ]
+      "icon": "assets/icons/facebook.svg"
+    }
+  ],
+  "contact": {
+    "email": "derek@simbafilms.org",
+    "locations": ["Switzerland", "RD Congo", "South Africa"]
   }
+}
+
 
