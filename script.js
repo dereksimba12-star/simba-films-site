@@ -122,57 +122,53 @@
   })();
 
   // ----- 5) Socials (SVG inline + mailto) -----
-  (async function(){
-    const root = document.querySelector('[data-cms-list="socials"]');
-    if (!root) return;
-    const arr = cfg.socials;
-    if (!Array.isArray(arr)) return;
+(async function(){
+  const root = document.querySelector('[data-cms-list="socials"]');
+  if (!root) return;
+  const arr = cfg.socials;
+  if (!Array.isArray(arr)) return;
 
-    // utilitaire pour inliner un SVG (texte) dans un lien
-    async function inlineSvgInto(anchor, svgUrl) {
-      try {
-        const text = await fetch(`${svgUrl}?v=${VERSION}`, { cache: 'no-store' }).then(r => r.text());
-        anchor.innerHTML = text;
-      } catch (e) {
-        console.warn('SVG introuvable, fallback texte:', svgUrl);
-        anchor.textContent = (anchor.getAttribute('aria-label') || 'social').toUpperCase();
-      }
+  async function inlineSvg(anchor, url) {
+    const res = await fetch(`${url}?v=${VERSION}`, { cache: 'no-store' });
+    const text = await res.text();
+    anchor.innerHTML = text;
+    // pour compat CSS existante si besoin :
+    const svg = anchor.querySelector('svg');
+    if (svg) svg.classList.add('icon');
+  }
+
+  root.innerHTML = '';
+  for (const s of arr) {
+    const li = document.createElement('li');
+    li.className = 'social';
+
+    const a = document.createElement('a');
+    const platform = (s.platform || '').toLowerCase();
+
+    // email -> mailto, sinon lien externe
+    if (platform === 'email' || platform === 'mail' || (s.url && s.url.includes('@'))) {
+      const email = (s.url || '').replace(/^mailto:/i, '').trim();
+      a.href = `mailto:${email}`;
+    } else {
+      a.href = s.url;
+      a.target = '_blank';
+      a.rel = 'noopener';
     }
 
-    // Construire la liste
-    root.innerHTML = ''; // reset
-    for (const s of arr) {
-      const li = document.createElement('li');
-      li.className = 'social';
+    a.setAttribute('aria-label', platform || 'social');
+    a.dataset.platform = platform;
 
-      const a  = document.createElement('a');
-      const platform = (s.platform || '').toLowerCase();
-
-      // Email → mailto: et pas de target _blank
-      if (platform === 'email' || platform === 'mail' || s.url?.includes('@')) {
-        const email = (s.url || '').replace(/^mailto:/i, '').trim();
-        a.href = `mailto:${email}`;
-      } else {
-        // Liens externes
-        a.href = s.url;
-        a.target = '_blank';
-        a.rel = 'noopener';
-      }
-
-      a.setAttribute('aria-label', platform || 'social');
-      a.dataset.platform = platform;
-
-      // Inline SVG si possible, sinon fallback texte
-      if (s.icon && s.icon.endsWith('.svg')) {
-        await inlineSvgInto(a, s.icon);
-      } else {
-        a.textContent = platform || 'social';
-      }
-
-      li.appendChild(a);
-      root.appendChild(li);
+    if (s.icon && s.icon.endsWith('.svg')) {
+      try { await inlineSvg(a, s.icon); }
+      catch { a.textContent = (platform || 'social').toUpperCase(); }
+    } else {
+      a.textContent = (platform || 'social').toUpperCase();
     }
-  })();
+
+    li.appendChild(a);
+    root.appendChild(li);
+  }
+})();
 
   // ----- 6) SHOWREELS (multi) -----
   (function(){

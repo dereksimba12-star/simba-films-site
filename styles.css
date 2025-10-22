@@ -228,68 +228,38 @@ body::before{
   transition: all 0.3s ease;
 }
 
-/* === Social icons — noir & blanc propre === */
-
-/* Visually hidden (pour <span class="sr-only">) */
-.sr-only{ position:absolute; left:-9999px; }
-
-/* Conteneur */
-.socials { 
-  display:flex; 
-  gap:12px; 
-  list-style:none; 
-  padding:0; 
-  margin:12px 0 0; 
-}
-
-/* Lien-icône : cercle cliquable */
+/* --- Socials (inline SVG, animations conservées) --- */
+.socials { display:flex; gap:12px; list-style:none; padding:0; margin:12px 0 0; }
 .socials a { 
-  display:inline-flex; 
-  align-items:center; 
-  justify-content:center; 
-  width:36px; 
-  height:36px; 
-  border-radius:50%;
-  transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
+  display:inline-flex; align-items:center; justify-content:center; 
+  width:36px; height:36px; border-radius:50%;
+  color:#fff;                              /* couleur de base (blanc) */
+  transition: transform .2s ease, box-shadow .2s ease;
 }
 
-/* Harmonisation des SVG inline :
-   - on force la couleur via currentColor
-   - Tes SVG ayant un stroke, on le mappe à la couleur du lien */
-.socials a { color:#fff; }                 /* blanc par défaut sur fond sombre */
-.socials svg { width:24px; height:24px; }
-.socials svg [stroke] { stroke: currentColor; }
-.socials svg [fill]:not([fill="none"]) { fill: currentColor; }
+/* taille + transition sur le SVG */
+.socials a svg { width:24px; height:24px; display:block; transition: transform .2s ease, opacity .2s ease; }
 
-/* Mouvement + léger glow au survol */
-.socials a:hover,
-.socials a:focus-visible {
-  transform: translateY(-2px) scale(1.08);
+/* >>> Force la couleur, même si les SVG ont fill="#000" */
+.socials a svg, 
+.socials a svg * { 
+  fill: currentColor !important; 
+  stroke: currentColor !important; 
 }
 
-/* Glow par plateforme (optionnels) */
+/* survol = lift + léger twist */
+.socials a:hover, .socials a:focus-visible { transform: translateY(-2px) scale(1.08); }
+.socials a:hover svg, .socials a:focus-visible svg { transform: rotate(-6deg); opacity: .9; }
+
+/* (optionnels) halos par plateforme */
 .socials a[data-platform="instagram"]:hover,
-.socials a[data-platform="instagram"]:focus-visible {
-  box-shadow: 0 0 12px rgba(255,90,0,.45), 0 0 24px rgba(225,48,108,.35);
-}
+.socials a[data-platform="instagram"]:focus-visible { box-shadow: 0 0 12px rgba(255,90,0,.45), 0 0 24px rgba(225,48,108,.35); }
 .socials a[data-platform="tiktok"]:hover,
-.socials a[data-platform="tiktok"]:focus-visible {
-  box-shadow: 0 0 12px rgba(0,242,234,.45), 0 0 24px rgba(255,0,80,.35);
-}
+.socials a[data-platform="tiktok"]:focus-visible { box-shadow: 0 0 12px rgba(0,242,234,.45), 0 0 24px rgba(255,0,80,.35); }
 .socials a[data-platform="facebook"]:hover,
-.socials a[data-platform="facebook"]:focus-visible {
-  box-shadow: 0 0 14px rgba(59,89,152,.5);
-}
+.socials a[data-platform="facebook"]:focus-visible { box-shadow: 0 0 14px rgba(59,89,152,.5); }
 
-/* Petit twist optionnel */
-.socials a:hover .icon,
-.socials a:focus-visible .icon { transform: rotate(-6deg); }
-
-/* Réduction d’animations */
+/* accessibilité : réduit les anims si demandé */
 @media (prefers-reduced-motion: reduce) {
-  .socials a,
-  .socials a .icon {
-    transition: none !important;
-    transform: none !important;
-  }
+  .socials a, .socials a svg { transition: none !important; transform: none !important; }
 }
