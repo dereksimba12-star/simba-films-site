@@ -263,3 +263,26 @@ body::before{
 @media (prefers-reduced-motion: reduce) {
   .socials a, .socials a svg { transition: none !important; transform: none !important; }
 }
+/* === Showreel: plus compact === */
+#reel { padding-top: 48px; padding-bottom: 56px; }
+.reel-select-wrap { margin-bottom: 12px; }
+
+.reel-frame {
+  max-width: 820px;
+  margin: 0 auto;
+}
+.reel-frame iframe,
+.reel-frame video {
+  width: 100%;
+  aspect-ratio: 16/9;
+  max-height: 460px;
+  border: 0;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,.3);
+}
+
+@media (max-width: 680px){
+  #reel { padding-top: 36px; padding-bottom: 44px; }
+  .reel-frame { max-width: 100%; }
+  .reel-frame iframe, .reel-frame video { max-height: 320px; }
+}

@@ -127,31 +127,11 @@
   if (!root) return;
   const arr = Array.isArray(cfg.socials) ? cfg.socials : [];
 
-  // Pack d’icônes en currentColor (blanc sur ton fond sombre)
   const SVGS = {
-    email: `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-        <g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2.25" y="4.5" width="19.5" height="15" rx="2.25" ry="2.25"/>
-          <path d="M3 6l9 6 9-6"/>
-        </g>
-      </svg>`,
-    instagram: `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-        <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="3" width="18" height="18" rx="4"/>
-          <circle cx="12" cy="12" r="3.8"/>
-          <circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/>
-        </g>
-      </svg>`,
-    tiktok: `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M14 3v7.2c0 2.3-1.9 4.2-4.2 4.2A3.2 3.2 0 0 0 6.6 18c0 1.8 1.4 3.2 3.2 3.2 3.6 0 5.9-2.2 5.9-5.7V8.5a6.6 6.6 0 0 0 4.7 2V7.1a4.9 4.9 0 0 1-4.7-4.1H14Z" fill="currentColor"/>
-      </svg>`,
-    facebook: `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M13.5 21v-7h2.3l.4-3h-2.7V9a1.2 1.2 0 0 1 1.4-1.3h1.3V5.1A14 14 0 0 0 14 5c-2.2 0-3.5 1.4-3.5 3.9V11H8v3h2.6v7h2.9Z" fill="currentColor"/>
-      </svg>`
+    email: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.25" y="4.5" width="19.5" height="15" rx="2.25" ry="2.25"/><path d="M3 6l9 6 9-6"/></g></svg>`,
+    instagram: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></g></svg>`,
+    tiktok: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v7.2c0 2.3-1.9 4.2-4.2 4.2A3.2 3.2 0 0 0 6.6 18c0 1.8 1.4 3.2 3.2 3.2 3.6 0 5.9-2.2 5.9-5.7V8.5a6.6 6.6 0 0 0 4.7 2V7.1a4.9 4.9 0 0 1-4.7-4.1H14Z" fill="currentColor"/></svg>`,
+    facebook: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-7h2.3l.4-3h-2.7V9a1.2 1.2 0 0 1 1.4-1.3h1.3V5.1A14 14 0 0 0 14 5c-2.2 0-3.5 1.4-3.5 3.9V11H8v3h2.6v7h2.9Z" fill="currentColor"/></svg>`
   };
 
   root.innerHTML = '';
@@ -164,7 +144,6 @@
     a.dataset.platform = platform;
     a.setAttribute('aria-label', platform || 'social');
 
-    // Email => mailto, le reste -> lien externe
     if (platform === 'email' || platform === 'mail' || (item.url && item.url.includes('@'))) {
       const email = (item.url || '').replace(/^mailto:/i, '').trim();
       a.href = `mailto:${email}`;
@@ -173,25 +152,13 @@
       a.href = item.url;
       a.target = '_blank';
       a.rel = 'noopener';
-      // icône intégrée si connue, sinon fallback vers ton fichier/texte
-      if (SVGS[platform]) {
-        a.innerHTML = SVGS[platform];
-      } else if (item.icon && item.icon.endsWith('.svg')) {
-        // fallback soft: img si jamais tu gardes des fichiers custom
-        const img = document.createElement('img');
-        img.className = 'icon';
-        img.src = `${item.icon}?v=${Date.now()}`;
-        img.alt = `${platform} logo`;
-        a.appendChild(img);
-      } else {
-        a.textContent = (platform || 'social').toUpperCase();
-      }
+      a.innerHTML = SVGS[platform] || (item.icon ? `<img class="icon" src="${item.icon}?v=${Date.now()}" alt="${platform} logo">` : (platform || 'SOCIAL').toUpperCase());
     }
-
     li.appendChild(a);
     root.appendChild(li);
   });
 })();
+
 
   // ----- 6) SHOWREELS (multi) -----
   (function(){
