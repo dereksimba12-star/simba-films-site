@@ -21,14 +21,13 @@
     "langs": "EN • FR • SW",
     "image": "assets/hero/02.JPG"
   },
-    "gallery": [
+  "gallery": [
     "assets/hero/05.JPG",
     "assets/hero/02.JPG",
     "assets/hero/Sans titre-1 copie.JPG"
   ],
-
   "reels": [
-{
+    {
       "title": "Main Showreel",
       "platform": "youtube",
       "youtubeId": "d7aq82URjIk",
@@ -47,7 +46,6 @@
       "params": "rel=0&modestbranding=1"
     }
   ],
-
   "projects": [
     {
       "title": "Blood Coltan",
@@ -76,9 +74,8 @@
       "cta1": { "label": "Lookbook", "url": "#" },
       "cta2": { "label": "Pitch Deck", "url": "#" }
     }
-  ]
-  ,
-    "socials": [
+  ],
+  "socials": [
     {
       "platform": "instagram",
       "url": "https://instagram.com/derek_simba",
@@ -93,8 +90,12 @@
       "platform": "facebook",
       "url": "https://facebook.com/derekshotit",
       "icon": "assets/icons/facebook.svg"
+    },
+    {
+      "platform": "email",
+      "url": "dereksimba@simbafilms.org",
+      "icon": "assets/icons/mail.svg"
     }
   ],
   "contact": { "email": "dereksimba@simbafilms.org" }
-
-
+}

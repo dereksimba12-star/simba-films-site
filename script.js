@@ -1,4 +1,4 @@
-// script.js — charge content/site.json et injecte le contenu (+ fix email)
+// script.js — charge content/site.json et injecte le contenu (+ socials SVG inline, mailto, gallery top-level)
 (async () => {
   const VERSION = Date.now(); // cache-busting simple
   const JSON_URL = `content/site.json?v=${VERSION}`;
@@ -53,12 +53,11 @@
     if (typeof val === 'string') el.innerHTML = val;
   });
 
-  // ----- 2.b) Injection e-mail (texte + href) -----
+  // ----- 2.b) Email (injection unique + filet de sécurité) -----
   (function injectEmail() {
-    // Email depuis le JSON (fallback sur ton mail pro)
-    const email = (get(cfg, 'contact.email') || 'derek@simbafilms.org').trim();
+    const email = (get(cfg, 'contact.email') || 'dereksimba@simbafilms.org').trim();
 
-    // 1) Lien principal par id #contactEmail (recommandé dans index.html)
+    // Lien principal par id #contactEmail (recommandé dans index.html)
     const mainLink = qs('#contactEmail');
     if (mainLink) {
       mainLink.textContent = email;
@@ -66,26 +65,11 @@
       mainLink.setAttribute('data-email', 'true');
     }
 
-    // 2) Cibles "CMS"
-    // ex. <span data-cms-text="contact.email"></span>
-    qsa('[data-cms-text="contact.email"]').forEach(el => {
-      el.textContent = email;
-    });
-    // ex. <a data-cms="contact.email"></a> pour le href
-    qsa('[data-cms="contact.email"]').forEach(el => {
-      // Si c’est un lien, on le traite comme mailto
-      const isAnchor = el.tagName === 'A';
-      if (isAnchor) {
-        el.textContent = email;
-        el.setAttribute('href', `mailto:${email}`);
-      } else {
-        // Sinon on met juste le texte
-        el.textContent = email;
-      }
-    });
+    // Cibles CMS texte
+    qsa('[data-cms-text="contact.email"]').forEach(el => { el.textContent = email; });
 
-    // 3) Sélecteurs explicites si tu veux marquer des cibles : .js-email, [data-email]
-    qsa('.js-email, [data-email]').forEach(el => {
+    // Cibles CMS génériques
+    qsa('[data-cms="contact.email"]').forEach(el => {
       if (el.tagName === 'A') {
         el.textContent = email;
         el.setAttribute('href', `mailto:${email}`);
@@ -94,16 +78,12 @@
       }
     });
 
-    // 4) Filet de sécurité : corriger d’anciens liens mailto si présents
-    // (ex. ancien gmail resté en dur dans le HTML)
+    // Filet de sécurité : corriger d’anciens liens mailto si présents
     qsa('a[href^="mailto:"]').forEach(a => {
       const href = a.getAttribute('href') || '';
       const txt  = (a.textContent || '').trim();
-
-      // Si le texte contient un '@' différent de celui qu’on veut, on remplace.
       const txtHasAt = txt.includes('@') && txt !== email;
       const hrefDiff = !href.includes(`mailto:${email}`);
-
       if (txtHasAt) a.textContent = email;
       if (hrefDiff) a.setAttribute('href', `mailto:${email}`);
     });
@@ -128,7 +108,7 @@
       <article class="card project reveal stagger">
         <img class="parallax" data-speed="0.15" src="${p.image}?v=${VERSION}" alt="Visuel ${p.title}" loading="lazy" />
         <div class="card__body">
-          ${p.watchUrl ? `<a href="${p.watchUrl}" class="btn btn--sm" target="_blank">Watch</a>` : ''}
+          ${p.watchUrl ? `<a href="${p.watchUrl}" class="btn btn--sm" target="_blank" rel="noopener">Watch</a>` : ''}
           <h3>${p.title}</h3>
           <p>${p.summary || ''}</p>
           <ul class="tags">${(p.tags||[]).map(t=>`<li>${t}</li>`).join('')}</ul>
@@ -141,20 +121,57 @@
     `).join('');
   })();
 
-  // ----- 5) Socials -----
-  (function(){
+  // ----- 5) Socials (SVG inline + mailto) -----
+  (async function(){
     const root = document.querySelector('[data-cms-list="socials"]');
     if (!root) return;
     const arr = cfg.socials;
     if (!Array.isArray(arr)) return;
-    root.innerHTML = arr.map(s => `
-      <li class="social">
-        <a href="${s.url}" target="_blank" rel="noopener" aria-label="${s.platform}" data-platform="${(s.platform||'').toLowerCase()}">
-          <img class="icon" src="${s.icon}?v=${VERSION}" alt="${s.platform} logo" loading="lazy"
-               onerror="this.onerror=null; this.replaceWith(document.createTextNode('${(s.platform||'social').toUpperCase()}')); ">
-        </a>
-      </li>
-    `).join('');
+
+    // utilitaire pour inliner un SVG (texte) dans un lien
+    async function inlineSvgInto(anchor, svgUrl) {
+      try {
+        const text = await fetch(`${svgUrl}?v=${VERSION}`, { cache: 'no-store' }).then(r => r.text());
+        anchor.innerHTML = text;
+      } catch (e) {
+        console.warn('SVG introuvable, fallback texte:', svgUrl);
+        anchor.textContent = (anchor.getAttribute('aria-label') || 'social').toUpperCase();
+      }
+    }
+
+    // Construire la liste
+    root.innerHTML = ''; // reset
+    for (const s of arr) {
+      const li = document.createElement('li');
+      li.className = 'social';
+
+      const a  = document.createElement('a');
+      const platform = (s.platform || '').toLowerCase();
+
+      // Email → mailto: et pas de target _blank
+      if (platform === 'email' || platform === 'mail' || s.url?.includes('@')) {
+        const email = (s.url || '').replace(/^mailto:/i, '').trim();
+        a.href = `mailto:${email}`;
+      } else {
+        // Liens externes
+        a.href = s.url;
+        a.target = '_blank';
+        a.rel = 'noopener';
+      }
+
+      a.setAttribute('aria-label', platform || 'social');
+      a.dataset.platform = platform;
+
+      // Inline SVG si possible, sinon fallback texte
+      if (s.icon && s.icon.endsWith('.svg')) {
+        await inlineSvgInto(a, s.icon);
+      } else {
+        a.textContent = platform || 'social';
+      }
+
+      li.appendChild(a);
+      root.appendChild(li);
+    }
   })();
 
   // ----- 6) SHOWREELS (multi) -----
@@ -214,8 +231,11 @@
     const host = document.querySelector('[data-hero-rotator]');
     if (!host) return;
 
-    const gallery = (cfg.hero && Array.isArray(cfg.hero.gallery)) ? cfg.hero.gallery : [];
-    const list = gallery.length ? gallery : (cfg.hero?.image ? [cfg.hero.image] : []);
+    // ⚠️ Supporte gallery AU NIVEAU RACINE (cfg.gallery) et hero.gallery
+    const galleryTop = Array.isArray(cfg.gallery) ? cfg.gallery : [];
+    const galleryHero = (cfg.hero && Array.isArray(cfg.hero.gallery)) ? cfg.hero.gallery : [];
+    const list = (galleryTop.length ? galleryTop : galleryHero.length ? galleryHero : (cfg.hero?.image ? [cfg.hero.image] : []));
+
     if (!list.length) return;
 
     // Injecte les images
@@ -267,21 +287,7 @@
       menu.classList.toggle('is-open');
     });
   })();
-  // --- Sécurité : forcer l'affichage de l'e-mail ---
-document.addEventListener('DOMContentLoaded', () => {
-  const link = document.querySelector('#contactEmail');
-  if (link && !link.textContent.includes('@')) {
-    link.textContent = 'derek@simbafilms.org';
-    link.href = 'mailto:derek@simbafilms.org';
-  }
-});
- // ----- 10) Réinitialiser les animations (anim.js) -----
+
+  // ----- 10) Réinitialiser les animations (anim.js) -----
   if (typeof window.initUX === 'function') window.initUX(document);
 })();
-// ----- Mise à jour du contact email depuis le JSON -----
-const email = (cfg?.contact?.email || 'derek@simbafilms.org').trim();
-const emailLink = document.querySelector('#contactEmail');
-if (emailLink) {
-  emailLink.textContent = email;
-  emailLink.setAttribute('href', `mailto:${email}`);
-}
