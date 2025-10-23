@@ -286,3 +286,22 @@ body::before{
   .reel-frame { max-width: 100%; }
   .reel-frame iframe, .reel-frame video { max-height: 320px; }
 }
+/* === Social icons appearance + hover animation === */
+.socials a {
+  color: #fff;
+}
+.socials a svg,
+.socials a svg * {
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+.socials a {
+  transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+}
+.socials a:hover {
+  transform: translateY(-2px) scale(1.08);
+}
+.socials a:hover svg {
+  transform: rotate(-6deg);
+  opacity: .9;
+}

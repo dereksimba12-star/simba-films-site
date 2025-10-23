@@ -121,11 +121,13 @@
     `).join('');
   })();
 
- // ----- 5) Socials (SVG inline intégrés + mailto) -----
+ // ----- 5) Socials (inline SVG + mailto) -----
 (() => {
   const root = document.querySelector('[data-cms-list="socials"]');
   if (!root) return;
-  const arr = Array.isArray(cfg.socials) ? cfg.socials : [];
+
+  const items = Array.isArray(cfg.socials) ? cfg.socials : [];
+  console.log('[Socials.cfg]', items);
 
   const SVGS = {
     email: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.25" y="4.5" width="19.5" height="15" rx="2.25" ry="2.25"/><path d="M3 6l9 6 9-6"/></g></svg>`,
@@ -135,8 +137,10 @@
   };
 
   root.innerHTML = '';
-  arr.forEach(item => {
-    const platform = (item.platform || '').toLowerCase();
+  items.forEach((raw, i) => {
+    const platform = String(raw.platform || '').toLowerCase().trim();
+    const url = String(raw.url || '').trim();
+
     const li = document.createElement('li');
     li.className = 'social';
 
@@ -144,21 +148,26 @@
     a.dataset.platform = platform;
     a.setAttribute('aria-label', platform || 'social');
 
-    if (platform === 'email' || platform === 'mail' || (item.url && item.url.includes('@'))) {
-      const email = (item.url || '').replace(/^mailto:/i, '').trim();
+    if (platform === 'email' || platform === 'mail' || url.includes('@')) {
+      const email = url.replace(/^mailto:/i, '').trim();
       a.href = `mailto:${email}`;
       a.innerHTML = SVGS.email;
     } else {
-      a.href = item.url;
+      a.href = url || '#';
       a.target = '_blank';
       a.rel = 'noopener';
-      a.innerHTML = SVGS[platform] || (item.icon ? `<img class="icon" src="${item.icon}?v=${Date.now()}" alt="${platform} logo">` : (platform || 'SOCIAL').toUpperCase());
+      // injecte SVG connu, sinon mets un emoji visible pour debug
+      a.innerHTML = SVGS[platform] || '❔';
     }
+
+    if (!a.querySelector('svg')) {
+      console.warn('No SVG for', platform, '=> node content:', a.innerHTML);
+    }
+
     li.appendChild(a);
     root.appendChild(li);
   });
 })();
-
 
   // ----- 6) SHOWREELS (multi) -----
   (function(){
