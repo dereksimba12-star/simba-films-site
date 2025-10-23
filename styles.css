@@ -351,4 +351,42 @@ body::before{
 }
 
 .socials a:hover{ transform: translateY(-2px) scale(1.08); }
+/* --- FIX taille icônes réseaux --- */
+.socials {
+  display: flex;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  flex-wrap: wrap;
+}
+
+.socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;         /* taille du bouton */
+  height: 38px;
+  border-radius: 50%;
+  overflow: hidden;    /* ✨ coupe tout débordement */
+  background: transparent;
+  color: #fff;
+  transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+}
+
+.socials svg {
+  width: 20px !important;    /* ✨ taille fixe */
+  height: 20px !important;
+  flex: 0 0 20px;
+  display: block;
+}
+
+.socials svg, .socials svg * {
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+.socials a:hover {
+  transform: translateY(-2px) scale(1.08);
+}
 
