@@ -305,36 +305,17 @@ body::before{
   transform: rotate(-6deg);
   opacity: .9;
 }
-/* Social icons fix */
+/* Social icons – fix couleur + hover */
+.socials { display:flex; gap:12px; list-style:none; padding:0; margin:12px 0 0; }
 .socials a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  color: #fff;
-  background: transparent;
-  transition: transform .2s ease, box-shadow .2s ease;
+  display:inline-flex; align-items:center; justify-content:center;
+  width:36px; height:36px; border-radius:50%;
+  color:#fff; transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
 }
+.socials svg { width:22px; height:22px; }
+.socials svg, .socials svg * { fill: currentColor !important; stroke: currentColor !important; }
+.socials a:hover{ transform: translateY(-2px) scale(1.08); }
+.socials a[data-platform="instagram"]:hover { box-shadow:0 0 10px rgba(225,48,108,.4); }
+.socials a[data-platform="tiktok"]:hover    { box-shadow:0 0 10px rgba(0,242,234,.4); }
+.socials a[data-platform="facebook"]:hover  { box-shadow:0 0 10px rgba(59,89,152,.4); }
 
-.socials svg {
-  width: 22px;
-  height: 22px;
-  fill: currentColor !important;
-  stroke: currentColor !important;
-}
-
-.socials a:hover {
-  transform: translateY(-2px) scale(1.08);
-}
-
-.socials a[data-platform="instagram"]:hover {
-  box-shadow: 0 0 10px rgba(225, 48, 108, .4);
-}
-.socials a[data-platform="tiktok"]:hover {
-  box-shadow: 0 0 10px rgba(0, 242, 234, .4);
-}
-.socials a[data-platform="facebook"]:hover {
-  box-shadow: 0 0 10px rgba(59, 89, 152, .4);
-}
