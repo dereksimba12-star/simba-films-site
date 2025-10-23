@@ -327,4 +327,28 @@ body::before{
 .socials svg { width:22px; height:22px; display:block; }
 .socials svg, .socials svg * { fill: currentColor !important; stroke: currentColor !important; }
 .socials a:hover{ transform: translateY(-2px) scale(1.08); }
+/* --- Socials: taille cohérente --- */
+.socials { display:flex; gap:12px; list-style:none; padding:0; margin:12px 0 0; }
+
+.socials a{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:36px; height:36px; border-radius:50%;
+  color:#fff; transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+  font-size:0;            /* évite que la taille de police influence l'icône */
+  line-height:0;          /* supprime les espaces fantômes */
+}
+
+.socials svg{
+  width:22px;             /* <- ajuste ici (ex: 20, 22, 24) */
+  height:22px;
+  display:block;
+  flex:0 0 22px;
+}
+
+.socials svg, .socials svg *{
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+.socials a:hover{ transform: translateY(-2px) scale(1.08); }
 
