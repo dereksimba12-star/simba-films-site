@@ -129,10 +129,47 @@
         <!-- Instagram (version pleine) -->
 <ul class="socials">
   <li><a href="https://instagram.com/derek_simba" aria-label="Instagram" class="icon instagram"></a></li>
-  <li><a href="https://twitter.com/derek simba" aria-label="Twitter/X" class="icon twitter"></a></li>
+  <li><a href="https://twitter.com/derek_simba" aria-label="Twitter/X" class="icon twitter"></a></li>
   <li><a href="https://facebook.com/derekshotit" aria-label="Facebook" class="icon facebook"></a></li>
   <li><a href="mailto:dereksimba@simbafilms.org" aria-label="Email" class="icon email"></a></li>
 </ul>
+
+<form
+  name="contact"
+  method="POST"
+  action="/thank-you.html"
+  data-netlify="true"
+  class="contact-form reveal delay-3"
+  data-netlify-honeypot="bot-field"
+>
+
+  <label>
+    <span class="label-main">Full Name</span>
+    <input type="text" name="name" placeholder="Your full name" required />
+  </label>
+
+  <label>
+    <span class="label-main">Email Address</span>
+    <input type="email" name="email" placeholder="you@example.com" required />
+  </label>
+
+  <label>
+    <span class="label-main">Tell me about your project</span>
+
+    <textarea name="message" rows="6" placeholder="What can we create together ?" required></textarea>
+  </label>
+
+  <div class="contact-extra">
+    <p>Optional: share your <strong>timeline</strong>, <strong>location</strong> and a rough <strong>budget range</strong>.</p>
+  </div>
+
+  <button class="btn btn--accent cta contact-btn" type="submit">
+    <span>Send Message</span>
+  </button>
+
+  <p class="form-note">I’ll get back to you with ideas, timelines, and a budget estimate.</p>
+</form>
+
         <!-- Formulaire Netlify -->
         <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" class="form reveal delay-3">
           <input type="hidden" name="form-name" value="contact" />
