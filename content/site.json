@@ -82,12 +82,12 @@
     }
   ],
 
-  "socials": [
-    { "platform": "instagram", "url": "https://instagram.com/derek_simba" },
-    { "platform": "tiktok",    "url": "https://tiktok.com/@dereksimba01" },
-    { "platform": "facebook",  "url": "https://facebook.com/derekshotit" },
-    { "platform": "email",     "url": "dereksimba@simbafilms.org" }
-  ],
+ "socials": [
+  { "platform": "instagram", "url": "https://instagram.com/derek_simba" },
+  { "platform": "tiktok", "url": "https://tiktok.com/@dereksimba01" },
+  { "platform": "facebook", "url": "https://facebook.com/derekshotit" },
+  { "platform": "email", "url": "dereksimba@simbafilms.org" }
+],
 
   "contact": {
     "email": "dereksimba@simbafilms.org"

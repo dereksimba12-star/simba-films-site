@@ -327,57 +327,38 @@ body::before{
 .socials svg { width:22px; height:22px; display:block; }
 .socials svg, .socials svg * { fill: currentColor !important; stroke: currentColor !important; }
 .socials a:hover{ transform: translateY(-2px) scale(1.08); }
-/* --- Socials: taille cohérente --- */
-.socials { display:flex; gap:12px; list-style:none; padding:0; margin:12px 0 0; }
 
-.socials a{
-  display:inline-flex; align-items:center; justify-content:center;
-  width:36px; height:36px; border-radius:50%;
-  color:#fff; transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
-  font-size:0;            /* évite que la taille de police influence l'icône */
-  line-height:0;          /* supprime les espaces fantômes */
-}
-
-.socials svg{
-  width:22px;             /* <- ajuste ici (ex: 20, 22, 24) */
-  height:22px;
-  display:block;
-  flex:0 0 22px;
-}
-
-.socials svg, .socials svg *{
-  fill: currentColor !important;
-  stroke: currentColor !important;
-}
-
-.socials a:hover{ transform: translateY(-2px) scale(1.08); }
-/* --- FIX taille icônes réseaux --- */
+/* === SOCIAL ICONS — Taille uniforme & fix géants === */
 .socials {
   display: flex;
   gap: 12px;
   list-style: none;
   padding: 0;
-  margin: 12px 0 0;
+  margin: 14px 0;
+  align-items: center;
   flex-wrap: wrap;
 }
 
+.socials li,
 .socials a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;         /* taille du bouton */
-  height: 38px;
+  width: 34px;     /* Taille du bouton */
+  height: 34px;
   border-radius: 50%;
-  overflow: hidden;    /* ✨ coupe tout débordement */
+  overflow: hidden;
   background: transparent;
   color: #fff;
-  transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+  flex: 0 0 34px;
+  text-decoration: none;
+  transition: transform .2s ease, opacity .2s ease;
 }
 
 .socials svg {
-  width: 20px !important;    /* ✨ taille fixe */
-  height: 20px !important;
-  flex: 0 0 20px;
+  width: 18px !important;
+  height: 18px !important;
+  flex: 0 0 18px;
   display: block;
 }
 
@@ -389,4 +370,30 @@ body::before{
 .socials a:hover {
   transform: translateY(-2px) scale(1.08);
 }
+.socials {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.socials .icon {
+  width: 28px;
+  height: 28px;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+  filter: brightness(0) invert(1); /* rend les icônes blanches */
+  transition: transform .2s;
+}
+
+.socials .icon:hover {
+  transform: scale(1.15);
+}
+
+/* Icônes */
+.icon.instagram { background-image: url('assets/icons/instagram.svg'); }
+.icon.twitter   { background-image: url('assets/icons/twitter-x.svg'); }
+.icon.facebook  { background-image: url('assets/icons/facebook.svg'); }
+.icon.email     { background-image: url('assets/icons/mail.svg'); }
+
 
